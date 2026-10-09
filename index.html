@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BioQuiz — Biology Challenge</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --green: #16a36a;
+  --dark: #11251e;
+  --muted: #74847c;
+  --bg: #f4f8f5;
+  --white: #ffffff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: var(--dark);
+  background: var(--bg);
+}
+header {
+  height: 76px;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 7%;
+  border-bottom: 1px solid #e8eee9;
+}
+.logo { font-size: 23px; font-weight: 800; letter-spacing: -1px; }
+.logo span { color: var(--green); }
+.logo-icon { margin-right: 8px; }
+.header-tag {
+  font-size: 12px;
+  background: #e8f7ef;
+  color: #168653;
+  padding: 10px 15px;
+  border-radius: 30px;
+  font-weight: 700;
+}
+main { max-width: 1080px; margin: auto; padding: 36px 22px 60px; }
+.hero {
+  background: linear-gradient(120deg, #103c2c, #167950);
+  border-radius: 25px;
+  padding: 40px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.hero:after {
+  content: '🧬';
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 125px;
+  opacity: .16;
+  transform: rotate(-15deg);
+}
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 800;
+  color: #a5eac5;
+  text-transform: uppercase;
+}
+.hero h1 {
+  font-size: clamp(30px, 5vw, 47px);
+  line-height: 1.13;
+  letter-spacing: -2px;
+  margin: 15px 0;
+}
+.hero p { color: #d0e9dc; line-height: 1.7; max-width: 470px; font-size: 14px; }
+.hero-art { font-size: 95px; z-index: 1; margin-right: 30px; }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 16px;
+  margin: 22px 0 30px;
+}
+.stat {
+  padding: 19px;
+  background: white;
+  border: 1px solid #e8eee9;
+  border-radius: 17px;
+}
+.stat small { color: var(--muted); font-size: 12px; }
+.stat strong { display: block; font-size: 23px; margin-top: 8px; }
+.section-title { font-size: 21px; letter-spacing: -.6px; margin: 0 0 17px; }
+.panel {
+  background: white;
+  border: 1px solid #e8eee9;
+  border-radius: 22px;
+  padding: 30px;
+}
+.quiz-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.pill {
+  background: #e8f7ef;
+  color: #168653;
+  padding: 8px 12px;
+  font-size: 11px;
+  border-radius: 30px;
+  font-weight: 700;
+}
+.timer { color: #d97735; font-size: 13px; font-weight: 700; }
+.progress-track { height: 7px; background: #edf2ee; border-radius: 10px; overflow: hidden; }
+.progress { height: 100%; width: 0%; background: var(--green); transition: width .3s; }
+.question-count { color: var(--muted); font-size: 12px; margin-top: 20px; }
+.question { font-size: clamp(20px, 3vw, 26px); line-height: 1.45; margin: 12px 0 24px; letter-spacing: -.6px; }
+.answers { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.answer {
+  border: 1px solid #e2eae4;
+  background: white;
+  padding: 17px;
+  border-radius: 13px;
+  text-align: left;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--dark);
+  transition: .2s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.answer:hover:not(:disabled) { border-color: var(--green); background: #f4fcf7; transform: translateY(-2px); }
+.letter {
+  min-width: 30px; height: 30px; display: grid; place-items: center;
+  background: #eff4f0; border-radius: 9px; font-weight: 700; font-size: 12px;
+}
+.answer.correct { background: #e9f9ef; border-color: #21a366; }
+.answer.wrong { background: #fff0ef; border-color: #e76a62; }
+.answer:disabled { cursor: default; }
+.feedback {
+  margin-top: 18px; padding: 16px; border-radius: 12px;
+  background: #f0f8f2; font-size: 13px; line-height: 1.7;
+}
+.actions {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px; margin-top: 24px;
+}
+button.primary {
+  background: var(--green); color: white; border: 0;
+  border-radius: 12px; padding: 14px 22px; font-weight: 700;
+  cursor: pointer; font-family: inherit; transition: .2s;
+}
+button.primary:hover { background: #118755; transform: translateY(-1px); }
+button.primary:disabled { background: #b9c9bf; cursor: not-allowed; transform: none; }
+button.secondary {
+  background: #edf5ef; color: #177849; border: 0;
+  border-radius: 12px; padding: 14px 18px; font-weight: 700;
+  cursor: pointer; font-family: inherit;
+}
+.result { text-align: center; padding: 25px 5px; }
+.result-icon { font-size: 68px; }
+.result h2 { font-size: 34px; margin: 14px 0; }
+.score { font-size: 62px; font-weight: 800; color: var(--green); letter-spacing: -3px; }
+.result p { color: var(--muted); line-height: 1.7; }
+.result-details {
+  background: #f4f8f5; padding: 18px; border-radius: 14px;
+  margin: 22px auto; max-width: 350px; line-height: 2;
+}
+footer { text-align: center; padding: 25px; color: #84938a; font-size: 12px; }
+.hidden { display: none !important; }
+
+@media(max-width:650px) {
+  header { height: 65px; padding: 0 5%; }
+  .logo { font-size: 20px; }
+  main { padding: 22px 14px 40px; }
+  .hero { padding: 27px 23px; }
+  .hero-art { display: none; }
+  .hero:after { right: 5px; font-size: 85px; }
+  .hero h1 { font-size: 34px; }
+  .stats { gap: 9px; }
+  .stat { padding: 13px 10px; }
+  .stat strong { font-size: 19px; }
+  .stat small { font-size: 10px; }
+  .panel { padding: 19px 15px; }
+  .answers { grid-template-columns: 1fr; }
+  .answer { padding: 13px; }
+  .actions { flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span class="logo-icon">✳</span>Bio<span>Quiz</span></div>
+  <div class="header-tag">🧬 BIOLOGY CHALLENGE</div>
+</header>
+
+<main>
+  <section class="hero">
+    <div>
+      <div class="eyebrow">DISCOVER THE SCIENCE OF LIFE</div>
+      <h1>Seberapa jago<br>kamu di Biologi?</h1>
+      <p>Uji pengetahuanmu tentang sel, genetika, ekosistem, dan tubuh manusia. Belajar sains jadi lebih seru!</p>
+    </div>
+    <div class="hero-art">🔬</div>
+  </section>
+
+  <section class="stats">
+    <div class="stat"><small>📝 Jumlah soal</small><strong>10 Soal</strong></div>
+    <div class="stat"><small>⏱️ Waktu</small><strong>30 Detik</strong></div>
+    <div class="stat"><small>🏆 Skor maksimal</small><strong>100 Poin</strong></div>
+  </section>
+
+  <h2 class="section-title">Mulai tantanganmu</h2>
+  <section class="panel">
+    <div id="quiz">
+      <div class="quiz-top">
+        <span class="pill">🌿 BIOLOGI UMUM</span>
+        <span class="timer" id="timer">⏱ 30 detik</span>
+      </div>
+      <div class="progress-track"><div class="progress" id="progress"></div></div>
+      <div class="question-count" id="counter">PERTANYAAN 01 DARI 10</div>
+      <h2 class="question" id="question">Siap untuk menguji pengetahuanmu?</h2>
+      <div class="answers" id="answers"></div>
+      <div id="feedback" class="feedback hidden"></div>
+      <div class="actions">
+        <span id="points" style="font-size:12px;color:#74847c">⭐ Skor: 0</span>
+        <button class="primary" id="next" disabled onclick="nextQuestion()">Berikutnya →</button>
+      </div>
+    </div>
+
+    <div id="result" class="result hidden">
+      <div class="result-icon" id="resultIcon">🏆</div>
+      <h2 id="resultTitle">Tantangan selesai!</h2>
+      <p>Ini hasil perjalanan belajarmu hari ini.</p>
+      <div class="score"><span id="finalScore">0</span><span style="font-size:22px;color:#74847c"> / 100</span></div>
+      <div class="result-details">
+        <div>✅ Jawaban benar: <strong id="correctCount">0</strong> dari 10</div>
+        <div>📈 Akurasi: <strong id="accuracy">0%</strong></div>
+      </div>
+      <p id="resultMessage"></p>
+      <button class="primary" onclick="restartQuiz()">↻ Coba Lagi</button>
+    </div>
+  </section>
+</main>
+
+<footer>BioQuiz © 2026 · Keep curious, keep growing 🌱</footer>
+
+<script>
+const questions = [
+  {
+    q: "Apa unit struktural dan fungsional terkecil dari makhluk hidup?",
+    a: ["Jaringan", "Organ", "Sel", "Sistem organ"],
+    c: 2,
+    e: "Sel adalah unit struktural dan fungsional terkecil yang menyusun makhluk hidup."
+  },
+  {
+    q: "Organel sel yang berperan utama dalam menghasilkan energi melalui respirasi sel adalah...",
+    a: ["Ribosom", "Mitokondria", "Badan Golgi", "Lisosom"],
+    c: 1,
+    e: "Mitokondria merupakan tempat berlangsungnya sebagian besar proses respirasi sel yang menghasilkan ATP."
+  },
+  {
+    q: "Proses tumbuhan membuat makanan menggunakan energi cahaya disebut...",
+    a: ["Respirasi", "Fermentasi", "Transpirasi", "Fotosintesis"],
+    c: 3,
+    e: "Fotosintesis menggunakan energi cahaya untuk membentuk senyawa organik dari karbon dioksida dan air."
+  },
+  {
+    q: "Molekul yang membawa informasi genetik pada sebagian besar makhluk hidup adalah...",
+    a: ["DNA", "Glukosa", "Lemak", "Air"],
+    c: 0,
+    e: "DNA menyimpan informasi genetik yang diwariskan dari satu generasi ke generasi berikutnya."
+  },
+  {
+    q: "Organ tubuh manusia yang memompa darah ke seluruh tubuh adalah...",
+    a: ["Paru-paru", "Ginjal", "Jantung", "Hati"],
+    c: 2,
+    e: "Jantung memompa darah melalui pembuluh darah untuk mengedarkan oksigen dan zat yang dibutuhkan tubuh."
+  },
+  {
+    q: "Hubungan antara lebah dan bunga ketika lebah memperoleh nektar dan membantu penyerbukan disebut...",
+    a: ["Parasitisme", "Mutualisme", "Kompetisi", "Predasi"],
+    c: 1,
+    e: "Keduanya memperoleh keuntungan: lebah mendapatkan nektar dan bunga terbantu dalam proses penyerbukan."
+  },
+  {
+    q: "Apa nama pigmen hijau yang membantu tumbuhan menangkap energi cahaya?",
+    a: ["Hemoglobin", "Melanin", "Keratin", "Klorofil"],
+    c: 3,
+    e: "Klorofil menyerap energi cahaya yang digunakan dalam proses fotosintesis."
+  },
+  {
+    q: "Pembelahan sel yang menghasilkan dua sel anak dengan jumlah kromosom sama seperti sel induk disebut...",
+    a: ["Mitosis", "Meiosis", "Fertilisasi", "Mutasi"],
+    c: 0,
+    e: "Mitosis menghasilkan dua sel anak dengan jumlah kromosom yang sama dengan sel induk, dengan asumsi pembelahan berlangsung normal."
+  },
+  {
+    q: "Dalam rantai makanan, organisme yang dapat membuat makanan sendiri disebut...",
+    a: ["Konsumen", "Dekomposer", "Produsen", "Predator"],
+    c: 2,
+    e: "Produsen, seperti tumbuhan hijau, membuat bahan organik sendiri, umumnya melalui fotosintesis."
+  },
+  {
+    q: "Tempat pertukaran oksigen dan karbon dioksida di paru-paru manusia adalah...",
+    a: ["Trakea", "Alveolus", "Laring", "Diafragma"],
+    c: 1,
+    e: "Alveolus merupakan kantung udara kecil di paru-paru tempat pertukaran gas dengan kapiler darah."
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+let seconds = 30;
+let timerId = null;
+let correct = 0;
+
+const $ = id => document.getElementById(id);
+
+function startTimer() {
+  clearInterval(timerId);
+  seconds = 30;
+  updateTimer();
+  timerId = setInterval(() => {
+    seconds--;
+    updateTimer();
+    if (seconds <= 0) {
+      clearInterval(timerId);
+      if (!answered) chooseAnswer(-1);
+    }
+  }, 1000);
+}
+
+function updateTimer() {
+  $("timer").textContent = "⏱ " + seconds + " detik";
+  $("timer").style.color = seconds <= 10 ? "#dc4e43" : "#d97735";
+}
+
+function renderQuestion() {
+  answered = false;
+  $("feedback").classList.add("hidden");
+  $("next").disabled = true;
+  $("next").textContent = current === questions.length - 1 ? "Lihat Hasil →" : "Berikutnya →";
+  $("counter").textContent = `PERTANYAAN ${String(current + 1).padStart(2, "0")} DARI ${questions.length}`;
+  $("progress").style.width = `${current / questions.length * 100}%`;
+  $("question").textContent = questions[current].q;
+  $("answers").innerHTML = "";
+
+  questions[current].a.forEach((answer, i) => {
+    const button = document.createElement("button");
+    button.className = "answer";
+    const letter = document.createElement("span");
+    letter.className = "letter";
+    letter.textContent = String.fromCharCode(65 + i);
+    const label = document.createElement("span");
+    label.textContent = answer;
+    button.append(letter, label);
+    button.onclick = () => chooseAnswer(i);
+    $("answers").appendChild(button);
+  });
+
+  $("points").textContent = "⭐ Skor: " + score;
+  startTimer();
+}
+
+function chooseAnswer(index) {
+  if (answered) return;
+  answered = true;
+  clearInterval(timerId);
+
+  const item = questions[current];
+  const buttons = $("answers").querySelectorAll("button");
+  buttons.forEach((button, i) => {
+    button.disabled = true;
+    if (i === item.c) button.classList.add("correct");
+    else if (i === index) button.classList.add("wrong");
+  });
+
+  if (index === item.c) {
+    correct++;
+    score += Math.max(5, seconds * 3 + 10);
+    $("feedback").style.background = "#e9f9ef";
+    $("feedback").innerHTML = "✅ <strong>Hebat! Jawabanmu benar.</strong><br>" + item.e;
+  } else {
+    $("feedback").style.background = "#fff3ef";
+    $("feedback").innerHTML = (index === -1 ? "⏰ <strong>Waktu habis!</strong>" : "💡 <strong>Belum tepat.</strong>") + "<br>" + item.e;
+  }
+
+  $("feedback").classList.remove("hidden");
+  $("points").textContent = "⭐ Skor: " + score;
+  $("next").disabled = false;
+  $("progress").style.width = `${(current + 1) / questions.length * 100}%`;
+}
+
+function nextQuestion() {
+  if (!answered) return;
+  if (current < questions.length - 1) {
+    current++;
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  clearInterval(timerId);
+  $("quiz").classList.add("hidden");
+  $("result").classList.remove("hidden");
+
+  const final = Math.min(100, Math.round(correct / questions.length * 100));
+  $("finalScore").textContent = final;
+  $("correctCount").textContent = correct;
+  $("accuracy").textContent = final + "%";
+
+  if (final >= 80) {
+    $("resultIcon").textContent = "🏆";
+    $("resultTitle").textContent = "Biology Master!";
+    $("resultMessage").textContent = "Luar biasa! Kamu punya pemahaman biologi yang kuat. Terus eksplorasi ilmu kehidupan!";
+  } else if (final >= 50) {
+    $("resultIcon").textContent = "🌱";
+    $("resultTitle").textContent = "Terus Bertumbuh!";
+    $("resultMessage").textContent = "Kamu sudah berada di jalur yang bagus. Pelajari kembali pembahasannya dan tingkatkan skor kamu!";
+  } else {
+    $("resultIcon").textContent = "🔬";
+    $("resultTitle").textContent = "Saatnya Bereksplorasi!";
+    $("resultMessage").textContent = "Tidak apa-apa! Setiap jawaban adalah kesempatan belajar. Baca pembahasan dan coba lagi!";
+  }
+}
+
+function restartQuiz() {
+  current = 0;
+  score = 0;
+  correct = 0;
+  $("result").classList.add("hidden");
+  $("quiz").classList.remove("hidden");
+  renderQuestion();
+}
+
+renderQuestion();
+</script>
+</body>
+</html>
