@@ -254,68 +254,88 @@ footer { text-align: center; padding: 25px; color: #84938a; font-size: 12px; }
 <footer>BioQuiz © 2026 · Keep curious, keep growing 🌱</footer>
 
 <script>
+  
+
+ 
 const questions = [
   {
-    q: "Apa unit struktural dan fungsional terkecil dari makhluk hidup?",
-    a: ["Jaringan", "Organ", "Sel", "Sistem organ"],
-    c: 2,
-    e: "Sel adalah unit struktural dan fungsional terkecil yang menyusun makhluk hidup."
-  },
-  {
-    q: "Organel sel yang berperan utama dalam menghasilkan energi melalui respirasi sel adalah...",
-    a: ["Ribosom", "Mitokondria", "Badan Golgi", "Lisosom"],
+    q: "Hormon tumbuhan yang berperan dalam pemanjangan sel dan dominansi apikal adalah...",
+    a: ["Etilen", "Auksin", "Asam absisat", "Kalin"],
     c: 1,
-    e: "Mitokondria merupakan tempat berlangsungnya sebagian besar proses respirasi sel yang menghasilkan ATP."
+    e: "Auksin membantu pemanjangan sel dan berperan dalam dominansi apikal pada tumbuhan."
   },
   {
-    q: "Proses tumbuhan membuat makanan menggunakan energi cahaya disebut...",
-    a: ["Respirasi", "Fermentasi", "Transpirasi", "Fotosintesis"],
-    c: 3,
-    e: "Fotosintesis menggunakan energi cahaya untuk membentuk senyawa organik dari karbon dioksida dan air."
+    q: "Enzim yang berfungsi memecah hidrogen peroksida (H₂O₂) menjadi air dan oksigen adalah...",
+    a: ["Amilase", "Pepsin", "Katalase", "Lipase"],
+    c: 2,
+    e: "Katalase menguraikan hidrogen peroksida menjadi air dan oksigen sehingga mengurangi dampak senyawa tersebut bagi sel."
   },
   {
-    q: "Molekul yang membawa informasi genetik pada sebagian besar makhluk hidup adalah...",
-    a: ["DNA", "Glukosa", "Lemak", "Air"],
+    q: "Tempat berlangsungnya glikolisis dalam sel eukariotik adalah...",
+    a: ["Sitoplasma", "Matriks mitokondria", "Membran dalam mitokondria", "Inti sel"],
     c: 0,
-    e: "DNA menyimpan informasi genetik yang diwariskan dari satu generasi ke generasi berikutnya."
+    e: "Glikolisis berlangsung di sitoplasma dan memecah glukosa menjadi dua molekul piruvat."
   },
   {
-    q: "Organ tubuh manusia yang memompa darah ke seluruh tubuh adalah...",
-    a: ["Paru-paru", "Ginjal", "Jantung", "Hati"],
-    c: 2,
-    e: "Jantung memompa darah melalui pembuluh darah untuk mengedarkan oksigen dan zat yang dibutuhkan tubuh."
-  },
-  {
-    q: "Hubungan antara lebah dan bunga ketika lebah memperoleh nektar dan membantu penyerbukan disebut...",
-    a: ["Parasitisme", "Mutualisme", "Kompetisi", "Predasi"],
-    c: 1,
-    e: "Keduanya memperoleh keuntungan: lebah mendapatkan nektar dan bunga terbantu dalam proses penyerbukan."
-  },
-  {
-    q: "Apa nama pigmen hijau yang membantu tumbuhan menangkap energi cahaya?",
-    a: ["Hemoglobin", "Melanin", "Keratin", "Klorofil"],
-    c: 3,
-    e: "Klorofil menyerap energi cahaya yang digunakan dalam proses fotosintesis."
-  },
-  {
-    q: "Pembelahan sel yang menghasilkan dua sel anak dengan jumlah kromosom sama seperti sel induk disebut...",
-    a: ["Mitosis", "Meiosis", "Fertilisasi", "Mutasi"],
+    q: "Jika DNA cetakan memiliki urutan 3′-TAC GGA CTT-5′, urutan mRNA yang terbentuk adalah...",
+    a: ["5′-AUG CCU GAA-3′", "5′-TAC GGA CTT-3′", "5′-UAC GGA CUU-3′", "5′-ATG CCT GAA-3′"],
     c: 0,
-    e: "Mitosis menghasilkan dua sel anak dengan jumlah kromosom yang sama dengan sel induk, dengan asumsi pembelahan berlangsung normal."
+    e: "mRNA dibentuk secara komplementer terhadap DNA cetakan: T berpasangan dengan A, A dengan U, C dengan G, dan G dengan C."
   },
   {
-    q: "Dalam rantai makanan, organisme yang dapat membuat makanan sendiri disebut...",
-    a: ["Konsumen", "Dekomposer", "Produsen", "Predator"],
-    c: 2,
-    e: "Produsen, seperti tumbuhan hijau, membuat bahan organik sendiri, umumnya melalui fotosintesis."
-  },
-  {
-    q: "Tempat pertukaran oksigen dan karbon dioksida di paru-paru manusia adalah...",
-    a: ["Trakea", "Alveolus", "Laring", "Diafragma"],
+    q: "Persilangan tanaman berbiji bulat heterozigot (Bb) dengan tanaman berbiji bulat heterozigot (Bb). Jika B dominan terhadap b, peluang keturunan berbiji keriput adalah...",
+    a: ["0%", "25%", "50%", "75%"],
     c: 1,
-    e: "Alveolus merupakan kantung udara kecil di paru-paru tempat pertukaran gas dengan kapiler darah."
+    e: "Persilangan Bb × Bb menghasilkan genotipe BB, Bb, Bb, dan bb. Hanya bb yang berbiji keriput, yaitu 1 dari 4 keturunan."
+  },
+  {
+    q: "Pada meiosis, pindah silang yang dapat menghasilkan kombinasi alel baru umumnya terjadi pada tahap...",
+    a: ["Profase I", "Metafase II", "Anafase II", "Telofase I"],
+    c: 0,
+    e: "Pindah silang berlangsung pada profase I meiosis ketika kromatid nonsaudara dari kromosom homolog bertukar segmen."
+  },
+  {
+    q: "Molekul yang menjadi akseptor akhir elektron dalam rantai transpor elektron pada respirasi aerob adalah...",
+    a: ["Karbon dioksida", "Glukosa", "Oksigen", "Asam piruvat"],
+    c: 2,
+    e: "Oksigen menerima elektron dan proton pada akhir rantai transpor elektron, kemudian membentuk air."
+  },
+  {
+    q: "Menurut teori evolusi melalui seleksi alam, populasi dapat mengalami perubahan sifat antargenerasi karena...",
+    a: [
+      "Semua individu berubah sesuai kebutuhan",
+      "Individu dengan sifat yang menguntungkan dapat meninggalkan lebih banyak keturunan",
+      "Organisme selalu menghasilkan mutasi yang dibutuhkan",
+      "Setiap individu memiliki peluang reproduksi yang selalu sama"
+    ],
+    c: 1,
+    e: "Seleksi alam dapat mengubah frekuensi sifat yang diwariskan ketika individu dengan sifat tertentu memiliki keberhasilan reproduksi berbeda."
+  },
+  {
+    q: "Teknik PCR dalam biologi molekuler digunakan untuk...",
+    a: [
+      "Menggandakan bagian DNA tertentu",
+      "Menerjemahkan protein menjadi DNA",
+      "Menghasilkan energi dari glukosa",
+      "Memisahkan kromosom saat meiosis"
+    ],
+    c: 0,
+    e: "PCR memperbanyak fragmen DNA tertentu melalui siklus denaturasi, penempelan primer, dan pemanjangan DNA."
+  },
+  {
+    q: "Pembuatan insulin manusia menggunakan bakteri yang membawa gen insulin merupakan penerapan...",
+    a: [
+      "Seleksi alam",
+      "Kultur jaringan konvensional",
+      "Rekayasa genetika",
+      "Fermentasi alkohol tanpa modifikasi gen"
+    ],
+    c: 2,
+    e: "Rekayasa genetika memungkinkan gen pengode insulin dimasukkan ke dalam organisme inang agar dapat menghasilkan protein tersebut."
   }
 ];
+
+
 
 let current = 0;
 let score = 0;
@@ -330,7 +350,7 @@ function startTimer() {
   clearInterval(timerId);
   seconds = 30;
   updateTimer();
-  timerId = setInterval(() => {
+  timerId = setInconstterval(() => {
     seconds--;
     updateTimer();
     if (seconds <= 0) {
